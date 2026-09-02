@@ -143,6 +143,28 @@ html, body {
   /* NO transform scale — keep natural size */
 }
 
+/* ── 2×2 Photo Collage Background ──────────────────────── */
+.bg-collage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 4px;               /* thin gap between cells, like the reference */
+  background-color: #1a0510; /* gap color — deep burgundy */
+}
+
+.collage-cell {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  /* Subtle zoom-in hover illusion via JS is optional;
+     static cover fills each quadrant perfectly */
+  transition: transform 8s ease;
+  overflow: hidden;
+}
+
 /* Each page's background-color fills the letterbox areas
    using a color sampled from that illustration. */
 #bg-apology {
@@ -172,42 +194,42 @@ html, body {
 
 /* Per-page tinted overlays — tuned to each illustration's color palette */
 #page-apology .bg-overlay {
-  /* photo1: teal+yellow illustration → warm rose overlay */
+  /* Collage of 4 illustrations — lighter overlay so all 4 show vividly */
   background: linear-gradient(
     160deg,
-    rgba(120, 20, 50, 0.50) 0%,
-    rgba(30, 5, 15, 0.38) 60%,
-    rgba(80, 15, 35, 0.52) 100%
+    rgba(80, 10, 30, 0.40) 0%,
+    rgba(20, 3, 10, 0.30) 50%,
+    rgba(60, 10, 25, 0.42) 100%
   );
 }
 
 #page-date-question .bg-overlay {
-  /* photo2: teal+white fur → deeper pink romantic overlay */
+  /* Real photos with green gardens & beach — warm romantic rose overlay */
   background: linear-gradient(
     135deg,
-    rgba(180, 40, 80, 0.45) 0%,
-    rgba(20, 4, 12, 0.40) 55%,
-    rgba(140, 30, 60, 0.48) 100%
+    rgba(150, 30, 60, 0.45) 0%,
+    rgba(20, 5, 10, 0.32) 50%,
+    rgba(120, 20, 50, 0.45) 100%
   );
 }
 
 #page-date-choice .bg-overlay {
-  /* photo3: cream+blue hat → soft dark romantic overlay */
+  /* Couple photos — warm red restaurant tones, deep romantic overlay */
   background: linear-gradient(
     150deg,
-    rgba(30, 10, 20, 0.50) 0%,
-    rgba(10, 3, 8, 0.38) 50%,
-    rgba(60, 15, 35, 0.50) 100%
+    rgba(100, 15, 30, 0.45) 0%,
+    rgba(15, 4, 8, 0.30) 50%,
+    rgba(80, 10, 25, 0.45) 100%
   );
 }
 
 .bg-overlay-final {
-  /* photo4: sepia rose → warm amber-rose overlay */
+  /* Final "I LOVE YOU" page — deeper vignette so text really pops */
   background: linear-gradient(
     135deg,
-    rgba(100, 30, 10, 0.48) 0%,
-    rgba(20, 5, 5, 0.42) 50%,
-    rgba(140, 40, 20, 0.50) 100%
+    rgba(80, 10, 25, 0.52) 0%,
+    rgba(10, 2, 6, 0.38) 50%,
+    rgba(100, 15, 35, 0.55) 100%
   );
 }
 
