@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -19,49 +19,71 @@
     <source src="assets/audio/music.mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- PAGE 1 — APOLOGY -->
+  <!-- ══════════════════════════════════════
+       PAGE 1 — APOLOGY
+  ══════════════════════════════════════ -->
   <section id="page-apology" class="page active">
-    <!-- 2x2 Collage Background -->
-    <div class="bg-collage" id="bg-apology-collage" aria-hidden="true">
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p1_1.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p1_2.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p1_3.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p1_4.jpg')"></div>
+    <div class="scrapbook-bg"></div>
+
+    <div class="scrapbook-photos" aria-hidden="true">
+      <div class="scrap-photo sp-1">
+        <img src="assets/photos/collage_p1_1.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-2">
+        <img src="assets/photos/collage_p1_2.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-3">
+        <img src="assets/photos/collage_p1_3.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-4">
+        <img src="assets/photos/collage_p1_4.jpg" alt="" />
+      </div>
     </div>
-    <div class="bg-overlay"></div>
+
     <div class="page-content apology-content">
       <div class="heart-wrapper" id="main-heart-wrapper">
-        <div class="heart-glow" id="main-heart-glow"></div>
+        <div class="heart-glow"></div>
         <div class="heart" id="main-heart">❤️</div>
         <div class="orbit-heart oh1">💕</div>
         <div class="orbit-heart oh2">🩷</div>
         <div class="orbit-heart oh3">💗</div>
         <div class="orbit-heart oh4">💖</div>
       </div>
-      <h1 class="apology-heading fade-in-up">Please forgive me</h1>
+      <h1 class="apology-heading">Please forgive me</h1>
       <div class="apology-buttons" id="apology-buttons">
         <button class="btn btn-yes" id="btn-forgiven" onclick="handleForgiven()">Ok you are forgiven</button>
-        <button class="btn btn-no" id="btn-no" onclick="handleNo()">No</button>
+        <button class="btn btn-no"  id="btn-no"       onclick="handleNo()">No</button>
       </div>
       <p class="no-message" id="no-message"></p>
     </div>
   </section>
 
-  <!-- PAGE 2 — DATE QUESTION -->
+  <!-- ══════════════════════════════════════
+       PAGE 2 — DATE QUESTION
+  ══════════════════════════════════════ -->
   <section id="page-date-question" class="page">
-    <!-- 2x2 Collage Background -->
-    <div class="bg-collage" id="bg-date-question-collage" aria-hidden="true">
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p2_1.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p2_2.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p2_3.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p2_4.jpg')"></div>
+    <div class="scrapbook-bg"></div>
+
+    <div class="scrapbook-photos" aria-hidden="true">
+      <div class="scrap-photo sp-1">
+        <img src="assets/photos/collage_p2_1.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-2">
+        <img src="assets/photos/collage_p2_2.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-3">
+        <img src="assets/photos/collage_p2_3.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-4">
+        <img src="assets/photos/collage_p2_4.jpg" alt="" />
+      </div>
     </div>
-    <div class="bg-overlay"></div>
+
     <div class="page-content date-question-content">
       <div class="stars-decoration" aria-hidden="true">✨ ✨ ✨</div>
-      <h1 class="date-heading fade-in-up">Will you please<br />Go on a date with me?</h1>
-      <p class="date-sub fade-in-up delay-200">Say yes… please? 🥺</p>
-      <div class="date-buttons fade-in-up delay-400">
+      <h1 class="date-heading">Will you please<br />Go on a date with me?</h1>
+      <p class="date-sub">Say yes… please? 🥺</p>
+      <div class="date-buttons">
         <button class="btn btn-date-yes" onclick="handleDateYes()">Yes</button>
         <button class="btn btn-date-yes" onclick="handleDateYes()">Ooh Yes 😍</button>
         <button class="btn btn-date-yes" onclick="handleDateYes()">Of Course Baby 💕</button>
@@ -69,18 +91,29 @@
     </div>
   </section>
 
-  <!-- PAGE 3 — DATE CHOICE -->
+  <!-- ══════════════════════════════════════
+       PAGE 3 — DATE CHOICE
+  ══════════════════════════════════════ -->
   <section id="page-date-choice" class="page">
-    <!-- 2x2 Collage Background — couple photos -->
-    <div class="bg-collage" id="bg-date-choice-collage" aria-hidden="true">
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p3_1.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p3_2.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p3_3.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p3_4.jpg')"></div>
+    <div class="scrapbook-bg"></div>
+
+    <div class="scrapbook-photos" aria-hidden="true">
+      <div class="scrap-photo sp-1">
+        <img src="assets/photos/collage_p3_1.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-2">
+        <img src="assets/photos/collage_p3_2.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-3">
+        <img src="assets/photos/collage_p3_3.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-4">
+        <img src="assets/photos/collage_p3_4.jpg" alt="" />
+      </div>
     </div>
-    <div class="bg-overlay"></div>
+
     <div class="page-content date-choice-content">
-      <h1 class="choice-heading fade-in-up">Where do you want to go? ❤️</h1>
+      <h1 class="choice-heading">Where do you want to go? ❤️</h1>
       <div class="choice-cards" id="choice-cards">
         <div class="choice-card" id="card-steak" onclick="handleSteak()">
           <div class="card-emoji">🥩</div>
@@ -95,6 +128,7 @@
       </div>
       <p class="steak-note" id="steak-note"></p>
     </div>
+
     <div id="bengali-toast" class="bengali-toast" aria-live="polite">
       <div class="toast-inner">
         <span class="toast-icon">😭</span>
@@ -106,21 +140,32 @@
     </div>
   </section>
 
-  <!-- PAGE 4 — FINAL "I LOVE YOU" -->
+  <!-- ══════════════════════════════════════
+       PAGE 4 — FINAL "I LOVE YOU"
+  ══════════════════════════════════════ -->
   <section id="page-final" class="page">
-    <!-- 2x2 Collage Background — intimate personal moments -->
-    <div class="bg-collage" id="bg-final-collage" aria-hidden="true">
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p4_1.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p4_2.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p4_3.jpg')"></div>
-      <div class="collage-cell" style="background-image:url('assets/photos/collage_p4_4.jpg')"></div>
+    <div class="scrapbook-bg"></div>
+
+    <div class="scrapbook-photos" aria-hidden="true">
+      <div class="scrap-photo sp-1">
+        <img src="assets/photos/collage_p4_1.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-2">
+        <img src="assets/photos/collage_p4_2.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-3">
+        <img src="assets/photos/collage_p4_3.jpg" alt="" />
+      </div>
+      <div class="scrap-photo sp-4">
+        <img src="assets/photos/collage_p4_4.jpg" alt="" />
+      </div>
     </div>
-    <div class="bg-overlay bg-overlay-final"></div>
+
     <div id="confetti-layer" aria-hidden="true"></div>
+
     <div class="page-content final-content">
-      <div class="final-heart-burst" id="final-heart-burst" aria-hidden="true"></div>
       <h1 class="final-heading" id="final-heading">I LOVE YOU ❤️</h1>
-      <p class="final-sub" id="final-sub">Best date choice ever. ❤️</p>
+      <p class="final-sub"  id="final-sub">Best date choice ever. ❤️</p>
       <p class="final-note" id="final-note">Thank you for choosing me, always. 💕</p>
       <div class="final-hearts-row" aria-hidden="true">
         <span>💖</span><span>💕</span><span>❤️</span><span>💗</span><span>💖</span>
