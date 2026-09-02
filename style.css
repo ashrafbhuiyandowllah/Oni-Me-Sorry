@@ -1,0 +1,720 @@
+/* =========================================================
+   LOVE WEBSITE — style.css
+   Romantic, dreamy, elegant aesthetic
+   ========================================================= */
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  --pink-light:   #ffd6e0;
+  --pink-mid:     #ff85a1;
+  --pink-deep:    #e8527a;
+  --red:          #c0392b;
+  --burgundy:     #7d1128;
+  --white:        #fff8f9;
+  --cream:        #fff0f3;
+  --overlay-dark: rgba(15, 5, 10, 0.42);
+  --overlay-pink: rgba(180, 40, 80, 0.18);
+  --glow-red:     rgba(220, 60, 80, 0.7);
+  --glow-pink:    rgba(255, 133, 161, 0.6);
+  --shadow-soft:  0 8px 32px rgba(160, 20, 60, 0.25);
+
+  --font-serif:   'Playfair Display', Georgia, serif;
+  --font-sans:    'Nunito', sans-serif;
+
+  --transition-fast:   0.25s ease;
+  --transition-medium: 0.55s cubic-bezier(.4,0,.2,1);
+  --transition-slow:   1.2s cubic-bezier(.4,0,.2,1);
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  background: #0d0308;
+  color: var(--white);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+/* ---------- Floating Hearts Layer ---------- */
+#floating-hearts-layer,
+#sparkles-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.float-heart {
+  position: absolute;
+  bottom: -60px;
+  font-size: 1.4rem;
+  animation: floatUp var(--dur, 6s) linear forwards;
+  opacity: 0;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateX(0) scale(1);   opacity: 0.9; }
+  50%  { transform: translateX(var(--drift, 30px)) scale(1.1); opacity: 0.7; }
+  100% { transform: translateX(0) scale(0.6) translateY(-110vh); opacity: 0; }
+}
+
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, var(--pink-mid) 60%, transparent 100%);
+  animation: sparklePop var(--dur, 1.5s) ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes sparklePop {
+  0%   { transform: scale(0); opacity: 1; }
+  50%  { transform: scale(1.8); opacity: 0.9; }
+  100% { transform: scale(0.2); opacity: 0; }
+}
+
+/* ---------- Music Toggle ---------- */
+#music-toggle {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 1000;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 1.3rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+#music-toggle:hover {
+  background: rgba(255,100,130,0.3);
+  transform: scale(1.1);
+}
+#music-toggle.muted { opacity: 0.5; }
+
+/* ---------- Pages ---------- */
+.page {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-slow);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.page.active {
+  opacity: 1;
+  pointer-events: all;
+  z-index: 2;
+}
+
+/* Background photo per page */
+.bg-photo {
+  position: absolute;
+  inset: 0;
+  /* contain = show the FULL image, no cropping ever.
+     Letterbox areas are filled by each page's background-color below. */
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: background-image 1.5s ease;
+  z-index: 0;
+  /* NO transform scale — keep natural size */
+}
+
+/* Each page's background-color fills the letterbox areas
+   using a color sampled from that illustration. */
+#bg-apology {
+  background-image: url('assets/photos/photo1.jpg');
+  background-color: #1a5f5a; /* teal from photo1 */
+}
+#bg-date-question {
+  background-image: url('assets/photos/photo2.jpg');
+  background-color: #1a5f5a; /* teal from photo2 */
+}
+#bg-date-choice {
+  background-image: url('assets/photos/photo3.jpg');
+  background-color: #c8c0b0; /* cream from photo3 */
+}
+#bg-final {
+  background-image: url('assets/photos/photo4.jpg');
+  background-color: #3a1a0a; /* warm brown from photo4 */
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-dark);
+  /* No blur — keeps illustrations pixel-sharp */
+  z-index: 1;
+}
+
+/* Per-page tinted overlays — tuned to each illustration's color palette */
+#page-apology .bg-overlay {
+  /* photo1: teal+yellow illustration → warm rose overlay */
+  background: linear-gradient(
+    160deg,
+    rgba(120, 20, 50, 0.50) 0%,
+    rgba(30, 5, 15, 0.38) 60%,
+    rgba(80, 15, 35, 0.52) 100%
+  );
+}
+
+#page-date-question .bg-overlay {
+  /* photo2: teal+white fur → deeper pink romantic overlay */
+  background: linear-gradient(
+    135deg,
+    rgba(180, 40, 80, 0.45) 0%,
+    rgba(20, 4, 12, 0.40) 55%,
+    rgba(140, 30, 60, 0.48) 100%
+  );
+}
+
+#page-date-choice .bg-overlay {
+  /* photo3: cream+blue hat → soft dark romantic overlay */
+  background: linear-gradient(
+    150deg,
+    rgba(30, 10, 20, 0.50) 0%,
+    rgba(10, 3, 8, 0.38) 50%,
+    rgba(60, 15, 35, 0.50) 100%
+  );
+}
+
+.bg-overlay-final {
+  /* photo4: sepia rose → warm amber-rose overlay */
+  background: linear-gradient(
+    135deg,
+    rgba(100, 30, 10, 0.48) 0%,
+    rgba(20, 5, 5, 0.42) 50%,
+    rgba(140, 40, 20, 0.50) 100%
+  );
+}
+
+/* Page content sits above overlays */
+.page-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px 40px;
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+  gap: 20px;
+  /* Subtle text shadow ensures readability over bright illustrated backgrounds */
+  text-shadow: 0 1px 6px rgba(0,0,0,0.45);
+}
+
+/* ---------- Fade-in animations ---------- */
+.fade-in-up {
+  animation: fadeInUp 0.9s ease forwards;
+}
+.delay-200 { animation-delay: 0.2s; opacity: 0; }
+.delay-400 { animation-delay: 0.4s; opacity: 0; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   PAGE 1 — APOLOGY
+   ========================================================= */
+.apology-content { gap: 24px; }
+
+/* Heart Container */
+.heart-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart-glow {
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-red) 0%, transparent 70%);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.12); }
+}
+
+.heart {
+  font-size: 7rem;
+  animation: heartbeat 1.4s ease-in-out infinite;
+  filter: drop-shadow(0 0 18px var(--glow-red));
+  user-select: none;
+  cursor: default;
+  transition: transform 0.3s ease;
+}
+
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  14%     { transform: scale(1.15); }
+  28%     { transform: scale(1); }
+  42%     { transform: scale(1.08); }
+  70%     { transform: scale(1); }
+}
+
+/* Orbiting mini hearts */
+.orbit-heart {
+  position: absolute;
+  font-size: 1.4rem;
+  animation: orbit var(--orbit-dur, 4s) linear infinite;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 4px var(--pink-mid));
+}
+.oh1 { --orbit-dur: 4.0s; --orbit-r: 90px; animation-name: orbit1; }
+.oh2 { --orbit-dur: 5.5s; --orbit-r: 105px; animation-name: orbit2; animation-delay: -1.4s; }
+.oh3 { --orbit-dur: 3.5s; --orbit-r: 80px;  animation-name: orbit3; animation-delay: -0.8s; }
+.oh4 { --orbit-dur: 6.0s; --orbit-r: 115px; animation-name: orbit4; animation-delay: -2.2s; }
+
+@keyframes orbit1 {
+  from { transform: rotate(0deg)   translateX(90px)  rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(90px)  rotate(-360deg); }
+}
+@keyframes orbit2 {
+  from { transform: rotate(0deg)   translateX(105px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(105px) rotate(-360deg); }
+}
+@keyframes orbit3 {
+  from { transform: rotate(0deg)   translateX(80px)  rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(80px)  rotate(-360deg); }
+}
+@keyframes orbit4 {
+  from { transform: rotate(0deg)   translateX(115px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(115px) rotate(-360deg); }
+}
+
+/* Apology heading */
+.apology-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 6vw, 3.2rem);
+  color: var(--white);
+  text-shadow: 0 2px 20px var(--glow-red), 0 0 60px rgba(255,100,120,0.4);
+  font-style: italic;
+  letter-spacing: 0.03em;
+}
+
+/* ---------- Buttons (general) ---------- */
+.btn {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  border-radius: 50px;
+  transition:
+    transform   var(--transition-fast),
+    box-shadow  var(--transition-fast),
+    background  var(--transition-fast),
+    font-size   var(--transition-medium),
+    padding     var(--transition-medium);
+  outline: none;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px) scale(1.04); }
+.btn:active { transform: scale(0.97); }
+
+/* Yes / Forgiven button */
+.btn-yes {
+  background: linear-gradient(135deg, var(--pink-deep), var(--red), var(--burgundy));
+  color: #fff;
+  font-size: 1.05rem;
+  padding: 14px 32px;
+  box-shadow: 0 4px 20px rgba(200,50,80,0.55), 0 0 0 0 var(--glow-pink);
+  animation: yesGlow 2.5s ease-in-out infinite;
+}
+@keyframes yesGlow {
+  0%,100% { box-shadow: 0 4px 20px rgba(200,50,80,0.55), 0 0 0 0 rgba(255,100,130,0); }
+  50%      { box-shadow: 0 6px 30px rgba(200,50,80,0.75), 0 0 20px 4px rgba(255,100,130,0.35); }
+}
+.btn-yes:hover {
+  background: linear-gradient(135deg, #ff6b8a, var(--red));
+  box-shadow: 0 8px 32px rgba(200,50,80,0.7);
+}
+
+/* No button */
+.btn-no {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  padding: 10px 22px;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.btn-no:hover {
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+}
+
+/* Buttons wrapper */
+.apology-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0 10px;
+}
+
+/* No-click message */
+.no-message {
+  font-size: 1.05rem;
+  color: var(--pink-light);
+  font-style: italic;
+  min-height: 1.6em;
+  text-shadow: 0 0 10px rgba(255,150,170,0.4);
+  animation: fadeInUp 0.4s ease;
+}
+
+/* =========================================================
+   PAGE 2 — DATE QUESTION
+   ========================================================= */
+.date-question-content { gap: 22px; }
+
+.stars-decoration {
+  font-size: 1.6rem;
+  letter-spacing: 12px;
+  animation: twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+.date-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 6vw, 3.2rem);
+  color: var(--white);
+  text-shadow: 0 2px 24px rgba(255,100,130,0.5);
+  font-style: italic;
+  line-height: 1.3;
+}
+
+.date-sub {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: var(--pink-light);
+  font-style: italic;
+}
+
+.date-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-date-yes {
+  background: linear-gradient(135deg, #ff6b8a, var(--pink-deep), var(--burgundy));
+  color: #fff;
+  font-size: 1rem;
+  padding: 14px 28px;
+  box-shadow: var(--shadow-soft);
+  animation: yesGlow 2.5s ease-in-out infinite;
+}
+.btn-date-yes:hover {
+  background: linear-gradient(135deg, #ff879f, #e8527a);
+}
+
+/* =========================================================
+   PAGE 3 — DATE CHOICE
+   ========================================================= */
+.date-choice-content { gap: 28px; }
+
+.choice-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.7rem, 5.5vw, 2.9rem);
+  color: var(--white);
+  text-shadow: 0 2px 24px rgba(255,100,130,0.5);
+  font-style: italic;
+}
+
+/* Cards container */
+.choice-cards {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.choice-card {
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 28px 24px;
+  width: 160px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition:
+    transform     var(--transition-medium),
+    box-shadow    var(--transition-medium),
+    width         var(--transition-medium),
+    padding       var(--transition-medium),
+    font-size     var(--transition-medium),
+    border-color  var(--transition-fast);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.choice-card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 10px 36px rgba(200,50,80,0.4);
+  border-color: rgba(255,150,170,0.6);
+}
+.choice-card:active { transform: scale(0.97); }
+
+.choice-card-fuchka {
+  border-color: rgba(255,133,161,0.5);
+  background: rgba(255,133,161,0.12);
+}
+.choice-card-fuchka:hover {
+  border-color: var(--pink-mid);
+  box-shadow: 0 10px 40px rgba(255,100,130,0.55);
+}
+
+.card-emoji  { font-size: 2.8rem; transition: font-size var(--transition-medium); }
+.card-label  { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; color: var(--white); }
+.card-sub    { font-size: 0.82rem; color: var(--pink-light); font-style: italic; }
+
+.steak-note {
+  font-size: 0.95rem;
+  color: var(--pink-light);
+  font-style: italic;
+  min-height: 1.4em;
+}
+
+/* Bengali Toast */
+.bengali-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  z-index: 500;
+  background: rgba(30, 5, 15, 0.92);
+  border: 1.5px solid var(--pink-deep);
+  border-radius: 18px;
+  padding: 14px 22px;
+  min-width: 240px;
+  max-width: 90vw;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 30px rgba(200,50,80,0.4), 0 0 0 1px rgba(255,133,161,0.2);
+  transition: transform 0.55s cubic-bezier(.4,0,.2,1), opacity 0.4s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.bengali-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.toast-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.toast-icon { font-size: 1.8rem; flex-shrink: 0; }
+
+.toast-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-sans);
+}
+
+.toast-text strong {
+  font-size: 1rem;
+  color: var(--pink-light);
+  line-height: 1.4;
+}
+
+.toast-sub {
+  font-size: 0.85rem;
+  color: rgba(255,200,210,0.75);
+  font-style: italic;
+}
+
+/* =========================================================
+   PAGE 4 — FINAL
+   ========================================================= */
+.final-content { gap: 20px; }
+
+.final-heart-burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  overflow: hidden;
+}
+
+.final-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 9vw, 5.5rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--white);
+  text-shadow:
+    0 0 20px var(--glow-red),
+    0 0 50px rgba(255,80,100,0.5),
+    0 2px 4px rgba(0,0,0,0.4);
+  animation: finalPop 1.2s cubic-bezier(.17,.89,.32,1.49) forwards, finalGlow 3s ease-in-out 1.2s infinite;
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+@keyframes finalPop {
+  0%   { opacity: 0; transform: scale(0.3); }
+  60%  { opacity: 1; transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes finalGlow {
+  0%,100% { text-shadow: 0 0 20px var(--glow-red), 0 0 50px rgba(255,80,100,0.5), 0 2px 4px rgba(0,0,0,0.4); }
+  50%     { text-shadow: 0 0 40px #ff4060, 0 0 80px rgba(255,80,100,0.75), 0 2px 4px rgba(0,0,0,0.4); }
+}
+
+.final-sub {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+  color: var(--pink-light);
+  font-style: italic;
+  animation: fadeInUp 0.8s ease 1s forwards;
+  opacity: 0;
+}
+
+.final-note {
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  color: rgba(255,220,230,0.85);
+  animation: fadeInUp 0.8s ease 1.4s forwards;
+  opacity: 0;
+}
+
+.final-hearts-row {
+  display: flex;
+  gap: 12px;
+  font-size: 2rem;
+  animation: fadeInUp 0.8s ease 1.7s forwards;
+  opacity: 0;
+}
+.final-hearts-row span { animation: heartbeat 1.6s ease-in-out infinite; }
+.final-hearts-row span:nth-child(1) { animation-delay: 0s; }
+.final-hearts-row span:nth-child(2) { animation-delay: 0.2s; }
+.final-hearts-row span:nth-child(3) { animation-delay: 0.4s; }
+.final-hearts-row span:nth-child(4) { animation-delay: 0.6s; }
+.final-hearts-row span:nth-child(5) { animation-delay: 0.8s; }
+
+/* Confetti hearts */
+.confetti-heart {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: confettiFall var(--dur, 3s) ease-in var(--delay, 0s) forwards;
+  opacity: 0;
+}
+
+@keyframes confettiFall {
+  0%   { transform: translateY(-20px) rotate(var(--rot, 0deg)) scale(0); opacity: 1; }
+  20%  { opacity: 1; transform: translateY(10vh) rotate(calc(var(--rot, 0deg) + 30deg)) scale(1.2); }
+  100% { transform: translateY(110vh) rotate(calc(var(--rot, 0deg) + 360deg)) scale(0.5); opacity: 0; }
+}
+
+/* =========================================================
+   TRANSITION OVERLAY
+   ========================================================= */
+#transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(200,50,80,0.95) 0%, rgba(100,10,30,0.98) 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+#transition-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.transition-heart {
+  font-size: 5rem;
+  animation: heartbeat 0.7s ease-in-out infinite;
+  filter: drop-shadow(0 0 24px rgba(255,150,170,0.9));
+}
+
+/* =========================================================
+   RESPONSIVE — Mobile
+   ========================================================= */
+@media (max-width: 600px) {
+  .heart { font-size: 5rem; }
+  .heart-wrapper { width: 140px; height: 140px; }
+  .oh1,.oh2,.oh3,.oh4 { font-size: 1.1rem; }
+
+  .apology-buttons { flex-direction: column; align-items: center; }
+
+  .choice-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .choice-card {
+    width: 80%;
+    max-width: 260px;
+  }
+
+  .date-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn-date-yes { width: 75%; }
+  .btn-yes, .btn-no { width: auto; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+

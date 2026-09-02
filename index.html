@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You ❤️</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div id="floating-hearts-layer" aria-hidden="true"></div>
+  <div id="sparkles-layer" aria-hidden="true"></div>
+
+  <button id="music-toggle" aria-label="Toggle music" title="Toggle music">🎵</button>
+  <audio id="bg-music" loop preload="none">
+    <source src="assets/audio/music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- PAGE 1 — APOLOGY -->
+  <section id="page-apology" class="page active">
+    <div class="bg-photo" id="bg-apology"></div>
+    <div class="bg-overlay"></div>
+    <div class="page-content apology-content">
+      <div class="heart-wrapper" id="main-heart-wrapper">
+        <div class="heart-glow" id="main-heart-glow"></div>
+        <div class="heart" id="main-heart">❤️</div>
+        <div class="orbit-heart oh1">💕</div>
+        <div class="orbit-heart oh2">🩷</div>
+        <div class="orbit-heart oh3">💗</div>
+        <div class="orbit-heart oh4">💖</div>
+      </div>
+      <h1 class="apology-heading fade-in-up">Please forgive me</h1>
+      <div class="apology-buttons" id="apology-buttons">
+        <button class="btn btn-yes" id="btn-forgiven" onclick="handleForgiven()">Ok you are forgiven</button>
+        <button class="btn btn-no" id="btn-no" onclick="handleNo()">No</button>
+      </div>
+      <p class="no-message" id="no-message"></p>
+    </div>
+  </section>
+
+  <!-- PAGE 2 — DATE QUESTION -->
+  <section id="page-date-question" class="page">
+    <div class="bg-photo" id="bg-date-question"></div>
+    <div class="bg-overlay"></div>
+    <div class="page-content date-question-content">
+      <div class="stars-decoration" aria-hidden="true">✨ ✨ ✨</div>
+      <h1 class="date-heading fade-in-up">Will you please<br />Go on a date with me?</h1>
+      <p class="date-sub fade-in-up delay-200">Say yes… please? 🥺</p>
+      <div class="date-buttons fade-in-up delay-400">
+        <button class="btn btn-date-yes" onclick="handleDateYes()">Yes</button>
+        <button class="btn btn-date-yes" onclick="handleDateYes()">Ooh Yes 😍</button>
+        <button class="btn btn-date-yes" onclick="handleDateYes()">Of Course Baby 💕</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 3 — DATE CHOICE -->
+  <section id="page-date-choice" class="page">
+    <div class="bg-photo" id="bg-date-choice"></div>
+    <div class="bg-overlay"></div>
+    <div class="page-content date-choice-content">
+      <h1 class="choice-heading fade-in-up">Where do you want to go? ❤️</h1>
+      <div class="choice-cards" id="choice-cards">
+        <div class="choice-card" id="card-steak" onclick="handleSteak()">
+          <div class="card-emoji">🥩</div>
+          <div class="card-label">Steak Date</div>
+          <div class="card-sub">A fancy evening out</div>
+        </div>
+        <div class="choice-card choice-card-fuchka" id="card-fuchka" onclick="handleFuchka()">
+          <div class="card-emoji">🌶️</div>
+          <div class="card-label">Fuchka Date</div>
+          <div class="card-sub">Our kind of perfect 💕</div>
+        </div>
+      </div>
+      <p class="steak-note" id="steak-note"></p>
+    </div>
+    <div id="bengali-toast" class="bengali-toast" aria-live="polite">
+      <div class="toast-inner">
+        <span class="toast-icon">😭</span>
+        <div class="toast-text">
+          <strong id="toast-main-msg">মাসের শুরু। কোনো টাকা নেই।</strong>
+          <span id="toast-sub-msg" class="toast-sub"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 4 — FINAL "I LOVE YOU" -->
+  <section id="page-final" class="page">
+    <div class="bg-photo" id="bg-final"></div>
+    <div class="bg-overlay bg-overlay-final"></div>
+    <div id="confetti-layer" aria-hidden="true"></div>
+    <div class="page-content final-content">
+      <div class="final-heart-burst" id="final-heart-burst" aria-hidden="true"></div>
+      <h1 class="final-heading" id="final-heading">I LOVE YOU ❤️</h1>
+      <p class="final-sub" id="final-sub">Best date choice ever. ❤️</p>
+      <p class="final-note" id="final-note">Thank you for choosing me, always. 💕</p>
+      <div class="final-hearts-row" aria-hidden="true">
+        <span>💖</span><span>💕</span><span>❤️</span><span>💗</span><span>💖</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSITION OVERLAY -->
+  <div id="transition-overlay" aria-hidden="true">
+    <div class="transition-heart">❤️</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
